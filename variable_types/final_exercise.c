@@ -1,29 +1,40 @@
-// Verifying Customer's age to check if film is allowed to be rented.
-#define CUSTOMER_NAME_SIZE 100
 #include <stdio.h>
 
-struct customer {
-  char name[CUSTOMER_NAME_SIZE];
-  int age;
+#define TAM_NOME_CLIENTE 100
+
+struct cliente {
+    char nome[TAM_NOME_CLIENTE];
+    int idade;
 };
 
-int main() {
-  struct customer customer1;
-  int film_class;
+struct filme {
+    int classificacao_filme;
+    int esta_disponivel;
+};
 
-  printf("\n Enter Customer Name: ");
-  fflush(stdin);
-  fgets(customer1.name, CUSTOMER_NAME_SIZE, stdin);
+int main(void){
+    struct cliente cli;
+    struct filme fi;
 
-  printf("\n Enter Customer Age: ");
-  scanf("%d", &customer1.age);
 
-  printf("\n Enter Film Classification: ");
-  scanf("%d", &film_class);
+    printf("\n Informe o nome do cliente: ");
+    fflush(stdin);
+    fgets(cli.nome, TAM_NOME_CLIENTE, stdin);
 
-  printf("\n Customer Name: %s", customer1.name);
-  printf("\n Customer Age: %d", customer1.age);
-  printf("\n Film Classification is: %d", film_class);
+    printf("\n Informe a idade do cliente: ");
+    scanf("%d", &cli.idade);
 
-  return 0;
+    printf("\n Informe a classificação do filme: ");
+    scanf("%d", &fi.classificacao_filme);
+
+    printf("\n Informe (0) se o filme não está disponível e (1) caso contrário: ");
+    scanf("%d", &fi.esta_disponivel);
+
+    printf("\n Cliente: %s", cli.nome);
+    printf("\n Idade: %d anos", cli.idade);
+    printf("\n Classificação do filme: %d anos", fi.classificacao_filme);
+    printf("\n Está disponível: %d", fi.esta_disponivel);
+    printf("\n Filme pode ser locado pelo cliente: %d", (fi.esta_disponivel) && (cli.idade >= fi.classificacao_filme));
+    printf("\n Anos restantes: %d", (cli.idade < fi.classificacao_filme) * (fi.classificacao_filme - cli.idade));
+
 }
